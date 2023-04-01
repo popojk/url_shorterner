@@ -63,6 +63,19 @@ app.post('/', async (req, res) => {
   }
 })
 
+app.get('/:shortUrl', async (req, res) => {
+  try {
+    const { shortUrl } = req.params
+    const data = await Url.findOne({ shortUrl }).lean()
+    if (!data) {
+      return res.status(404).send('<h1>短網不存在</h1>')
+    }
+    res.redirect(`${data.originalUrl}`)
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 app.listen(port, () => {
   console.log(`Server is listening on http://locallhost:${port}`)
 })
