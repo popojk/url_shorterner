@@ -22,9 +22,45 @@ const port = 3000
 app.set('view engine', 'hbs')
 
 const generateShortUrl = require('./utils/generateShortUrl')
+const Url = require('./models/url')
 
 app.get('/', (req, res) => {
-  res.send('connected')
+  res.render('index')
+})
+
+//create short url
+app.post('/', async (req, res) => {
+  try {
+    const originalUrl = req.body.url
+    const shortUrl = generateShortUrl()
+
+    //check if the url is empty
+    if (!originalUrl.length) {
+      res.render('index', { message: "網址不能為空" })
+    }
+    //check if short Url already exists
+    let duplicate = await Url.findOne({ shortUrl })
+    //if already exists, generate the url again
+    while (duplicate) {
+      shortUrl = generateShortUrl()
+      duplicate = await Url.findOne({ shortUrl })
+    }
+
+    //check if the original url already exists
+    let originalUrlData = await Url.findOne({ originalUrl }).lean()
+    //create url data if original url not exists
+    if (!originalUrlData) {
+      originalUrlData = await Url.create({ originalUrl, shortUrl })
+    }
+
+    res.render('index', {
+      originalUrl,
+      shortUrl: originalUrlData.shortUrl,
+      origin: req.headers.origin
+    })
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 app.listen(port, () => {
