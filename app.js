@@ -21,6 +21,8 @@ const port = 3000
 //告訴express要使用的view engine 是 handlebar
 app.set('view engine', 'hbs')
 
+const generateShortUrl = require('./utils/generateShortUrl')
+
 app.get('/', (req, res) => {
   res.send('connected')
 })
