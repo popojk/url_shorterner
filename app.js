@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars')
 
 //request body parser
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static('public'))
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()

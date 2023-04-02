@@ -9,11 +9,11 @@
     <div class='card-body'>
       {{#if shortUrl}}
       <h3 class='card-title'>Success!Please use this link:</h3>
-      <a href='{{origin}}/{{shortUrl}}'>
+      <a href='{{origin}}/{{shortUrl}}' id='url_text'>
         {{origin}}/{{shortUrl}}
       </a>
       <div>
-        <button class='btn btn-primary'>
+        <button class='btn btn-primary' onClick='copyUrl()'>
           copy
         </button>
       </div>
