@@ -26,6 +26,7 @@ router.post('/', async (req, res) => {
       duplicate = await Url.findOne({ shortUrl })
     }
 
+    //如果原網址已存在資料庫，將至資料庫撈取短網址，不使用新產生之短網址
     //check if the original url already exists
     let originalUrlData = await Url.findOne({ originalUrl }).lean()
     //create url data if original url not exists

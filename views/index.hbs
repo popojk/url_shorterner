@@ -21,12 +21,10 @@
       <form action="/" method="POST">
         <div class="input-group mb-3">
           <input type="text" placeholder="Input URL here" name="url" class="form-control"
-            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+            id="inputUrl">
           <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Shorten</button>
         </div>
-        {{#if message}}
-        <div class="text-danger">{{message}}</div>
-        {{/if}}
       </form>
       {{/if}}
     </div>
