@@ -1,7 +1,32 @@
-<form action="/" method="POST">
-  <input type="text" placeholder="URL" name="url">
-  <button type="submit">Create</button>
-</form>
-{{originalUrl}}
-{{shortUrl}}
-{{origin}}
+<div class='container mt-4 d-flex justify-content-center'>
+  <div class='card text-center' style='width: 25rem;'>
+    <h1>URL Shortener</h1>
+    <div>
+      <img style='width:200px'
+        src='https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png'
+        class="card-img-top" />
+    </div>
+    <div class='card-body'>
+      {{#if shortUrl}}
+      <h3 class='card-title'>Success!Please use this link:</h3>
+      <a href='{{origin}}/{{shortUrl}}'>
+        {{origin}}/{{shortUrl}}
+      </a>
+      <div>
+        <button class='btn btn-primary'>
+          copy
+        </button>
+      </div>
+      {{else}}
+      <form action="/" method="POST">
+        <div class="input-group mb-3">
+          <input type="text" placeholder="Input URL here" name="url" class="form-control"
+            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Shorten</button>
+        </div>
+      </form>
+      {{/if}}
+    </div>
+  </div>
+
+</div>
